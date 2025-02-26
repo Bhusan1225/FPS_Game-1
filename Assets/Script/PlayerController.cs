@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     bool isGrounded;
     bool isMoving;
 
-    private Vector3 lastPosition = new Vector3(0f, 0f, 0f);
+   Vector3 lastPosition = new Vector3(0f, 0f, 0f);
 
 
     // Start is called before the first frame update
