@@ -9,7 +9,7 @@ public class MouseMovement : MonoBehaviour
     float xRotation = 0f;
     float yRotation = 0f;
 
-    public float topClamp = 90f;
+    public float topClamp = -90f;
     public float bottomClamp = 90f;
 
 
