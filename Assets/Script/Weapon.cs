@@ -6,7 +6,7 @@ using static Weapon;
 
 public class Weapon : MonoBehaviour
 {
-    public Camera playerCamera;
+
 
     //shooting
     public bool isShooting, readyToShoot;
@@ -51,7 +51,7 @@ public class Weapon : MonoBehaviour
         {
             isShooting = Input.GetKey(KeyCode.Mouse0);
         }
-        else if(currentShootingMode ==ShootingMode.Single || currentShootingMode == ShootingMode.Brust)
+        else if (currentShootingMode == ShootingMode.Single || currentShootingMode == ShootingMode.Brust)
         {
             isShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
@@ -70,7 +70,7 @@ public class Weapon : MonoBehaviour
         Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
 
         //instantiate the bullet
-        GameObject bullet  = Instantiate( bulletPrefab, bulletSpawn.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
 
 
         //pointing the bullet to face the shooting directing
@@ -79,20 +79,20 @@ public class Weapon : MonoBehaviour
 
         //shoot a bullet
         Rigidbody BulletRigidbody = bullet.GetComponent<Rigidbody>();
-        BulletRigidbody.AddForce(shootingDirection *  bulletVelocity, ForceMode.Impulse);
+        BulletRigidbody.AddForce(shootingDirection * bulletVelocity, ForceMode.Impulse);
 
         //Destroy the bullet
         StartCoroutine(DestroyBulletAfterTime(bullet, bulletPrefabLifeTime));
 
 
-        if (allowReset) 
+        if (allowReset)
         {
             Invoke("ResetShot", shootingDelay);
             allowReset = false;
-        
+
         }
 
-        if(currentShootingMode == ShootingMode.Brust && burstBulletsLeft >1)
+        if (currentShootingMode == ShootingMode.Brust && burstBulletsLeft > 1)
         {
             burstBulletsLeft--;
             Invoke("FireWeapon", shootingDelay);
@@ -109,7 +109,7 @@ public class Weapon : MonoBehaviour
 
     private Vector3 CalculateDirectionAndSpread()
     {
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
         Vector3 targetPoint;
@@ -137,6 +137,6 @@ public class Weapon : MonoBehaviour
     {
         yield return new WaitForSeconds(bulletPrefabLifeTime);
         Destroy(bullet);
-        
+
     }
 }
