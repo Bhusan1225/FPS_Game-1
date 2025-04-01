@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    
+    public static PlayerController Instance;
 
     private CharacterController controller;
     public float speed = 12f;
@@ -14,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public float grounddistance = 0.4f;
     public LayerMask groundMask;
 
+    //private Vector3 playerPosition = transform.position;
+
     Vector3 jump;
 
     bool isGrounded;
@@ -21,11 +25,23 @@ public class PlayerController : MonoBehaviour
 
    Vector3 lastPosition = new Vector3(0f, 0f, 0f);
 
-
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);  // Keep across scenes
+        }
+        else
+        {
+            Destroy(gameObject);  // Destroy duplicate instances
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        
     }
 
     // Update is called once per frame
@@ -34,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
         Move();
         Jump();
-
+        getplayerPosition();
     }
     void Move()
     {
@@ -49,6 +65,11 @@ public class PlayerController : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);/////////////////////////////////////////////////// walk
 
         
+    }
+
+    public Vector3 getplayerPosition()
+    {
+        return this.transform.position;
     }
 
     void Jump()
