@@ -31,7 +31,7 @@ public class InteractionManager : MonoBehaviour
         {
             GameObject objectHitByRaycast = hit.transform.gameObject;
 
-            if (objectHitByRaycast.GetComponent<Weapon>())
+            if (objectHitByRaycast.GetComponent<Weapon>() && objectHitByRaycast.GetComponent<Weapon>().isActiveWeapon == false)
             {
                 Debug.Log("Weapon selected");
                 hoveredWeapon = objectHitByRaycast.gameObject.GetComponent<Weapon>();

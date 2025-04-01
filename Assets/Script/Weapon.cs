@@ -29,7 +29,7 @@ public class Weapon : MonoBehaviour
     public float bulletPrefabLifeTime = 3f;
 
     public GameObject muzzleEffect;
-    private Animator animator;
+    internal Animator animator;
 
     //loading 
     public float reloadTime;
@@ -117,20 +117,19 @@ public class Weapon : MonoBehaviour
         //SoundManager.Instance.ShootingChannel.Play();
         SoundManager.Instance.PlayShootingSound(thisWeaponModel);
         readyToShoot = false;
-
-        Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
-
         //instantiate the bullet
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
 
-
+       
+        
+        Vector3 shootingDirection = CalculateDirectionAndSpread().normalized; // this functiom sets the direction and spread
         //pointing the bullet to face the shooting directing
-        bullet.transform.forward = shootingDirection;
-
-
+        //bullet.transform.forward = shootingDirection;
         //shoot a bullet
         Rigidbody BulletRigidbody = bullet.GetComponent<Rigidbody>();
         BulletRigidbody.AddForce(shootingDirection * bulletVelocity, ForceMode.Impulse);
+
+
 
         //Destroy the bullet
         StartCoroutine(DestroyBulletAfterTime(bullet, bulletPrefabLifeTime));

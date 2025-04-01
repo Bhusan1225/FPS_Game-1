@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 949047910173887876}
   - component: {fileID: 1093315623978504231}
   - component: {fileID: 2518866332678875042}
+  - component: {fileID: 9178600843867856478}
   m_Layer: 0
   m_Name: 1911
   m_TagString: Untagged
@@ -242,7 +243,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0.08, y: 1.005, z: -21.076}
-  m_LocalScale: {x: 1.7349676, y: 1.7349676, z: 1.7349676}
+  m_LocalScale: {x: 1.7349678, y: 1.7349678, z: 1.7349678}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6934251867134147591}
@@ -288,6 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3611c6c30e995864292c046b6a8de6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActiveWeapon: 0
   isShooting: 0
   readyToShoot: 0
   shootingDelay: 0.3
@@ -304,7 +306,7 @@ MonoBehaviour:
   magazineSize: 6
   bulletsLeft: 0
   isReloading: 0
-  spawnPosition: {x: -0.1, y: 0.817, z: 1.17}
+  spawnPosition: {x: -0.1, y: 0.27, z: -0.21}
   spawnRotation: {x: 0, y: 0, z: 0}
   thisWeaponModel: 0
   currentShootingMode: 0
@@ -316,7 +318,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566689358486898071}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b2995295b82c30e4da173e3ef539cf0e, type: 2}
   m_CullingMode: 0
@@ -329,6 +331,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9178600843867856478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566689358486898071}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2179286608273199567
 GameObject:
   m_ObjectHideFlags: 0

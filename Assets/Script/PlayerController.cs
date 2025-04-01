@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float grounddistance = 0.4f;
     public LayerMask groundMask;
 
-    Vector3 velocity;
+    Vector3 jump;
 
     bool isGrounded;
     bool isMoving;
@@ -31,38 +31,49 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //ground check
-        isGrounded = Physics.CheckSphere(groundCheck.position, grounddistance, groundMask);
 
-        //resetting the default velocity
-        if (isGrounded && velocity.y < 0f)
-        {
-            velocity.y = -2f;
-        }
+        Move();
+        Jump();
 
-
+    }
+    void Move()
+    {
         //Getting the inputs
         float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+        float z = Input.GetAxis("Vertical");
 
         //create the moving vector
-        Vector3 move = transform.right * x + transform.forward * y;
+        Vector3 move = transform.right * x + transform.forward * z;
 
         //Actually moving the player 
         controller.Move(move * speed * Time.deltaTime);/////////////////////////////////////////////////// walk
 
+        
+    }
+
+    void Jump()
+
+    {
+        //ground check
+        isGrounded = Physics.CheckSphere(groundCheck.position, grounddistance, groundMask);
+
+        //resetting the default jump
+        if (isGrounded && jump.y < 0f)
+        {
+            jump.y = -2f;
+        }
         //Check if the player can jump
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            jump.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
         }
 
         //falling down
-        velocity.y += gravity * Time.deltaTime;
+        jump.y += gravity * Time.deltaTime;
 
         //execution of the jump 
-        controller.Move(velocity * Time.deltaTime);//////////////////////////////////////////////////////////// jump
+        controller.Move(jump * Time.deltaTime);//////////////////////////////////////////////////////////// jump
 
         if (lastPosition != gameObject.transform.position && isGrounded == true)
 
@@ -75,5 +86,6 @@ public class PlayerController : MonoBehaviour
         }
 
         lastPosition = gameObject.transform.position; // this will continously update the new position of the player as the last position
+
     }
 }
